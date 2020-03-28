@@ -35,13 +35,3 @@ def get_match_time(summoner):
 # Returns a summoner object with the specified name
 def get_summoner(summonerName):
     return cass.get_summoner(name=summonerName)
-
-# testing
-
-nightblue = get_summoner("Nightblue3")
-dolphinos = get_summoner("dolphinos")
-
-print("Nightblue3 in game? " + str(check_if_ingame(nightblue)))
-print("dolphinos in game? " + str(check_if_ingame(dolphinos)))
-
-print(get_match_time(nightblue))
