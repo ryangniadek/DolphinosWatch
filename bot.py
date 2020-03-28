@@ -30,7 +30,7 @@ async def in_command(ctx):
 async def time_command(ctx):
     for user in usernames:
         if lol.check_if_ingame(user):
-            await ctx.send("%s has been in game for %d seconds" % (user, lol.get_match_time(user)))
+            await ctx.send("%s has been in game for %d seconds" % (user, lol.get_current_match_time(user)))
             return
     await ctx.send("The bbern is not in a game")
 
