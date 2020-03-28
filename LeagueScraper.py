@@ -19,7 +19,7 @@ def check_if_ingame(summoner):
     return True
 
 def get_level(summoner):
-    
+    return ""
 
 
 # temp execution stuff

@@ -12,8 +12,6 @@ https://realpython.com/how-to-make-a-discord-bot-python/
 
 Commands
 
-DW!info - give information about the bot
-
 DW!in - check if dolphinos is in game
 
 DW!time - time played in the last 24 hours
