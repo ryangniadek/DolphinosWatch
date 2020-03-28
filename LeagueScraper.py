@@ -14,7 +14,7 @@ cass.set_default_region("NA")
 
 
 # functions ----------------------------------------------------------------
-# Returns a boolean value if dolphinos is currently in a game
+# Returns true if the specified summoner is currently in a game
 def check_if_ingame(summoner):
     try:
         match = summoner.current_match
@@ -25,11 +25,12 @@ def check_if_ingame(summoner):
 
 # Returns the amount of time, in seconds, a summoner has been in a match
 def get_match_time(summoner):
-    return 0
-
-# Returns the level of the specified summoner
-def get_level(summoner):
-    return 0
+    if (check_if_ingame(summoner)):
+        t = str(summoner.current_match.duration)
+        h, m, s = t.split(':')
+        return int(h) * 3600 + int(m) * 60 + int(s)
+    else:
+        return 0
 
 # Returns a summoner object with the specified name
 def get_summoner(summonerName):
@@ -42,3 +43,5 @@ dolphinos = get_summoner("dolphinos")
 
 print("Nightblue3 in game? " + str(check_if_ingame(nightblue)))
 print("dolphinos in game? " + str(check_if_ingame(dolphinos)))
+
+print(get_match_time(nightblue))
