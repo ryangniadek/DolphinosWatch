@@ -14,17 +14,20 @@ usernames = ['dolphinos', 'LHemisphere', 'neberizer']
 helper = {
     'in': 'Checks if dolphinos is in a game on any of his accounts. Pass an optional paramter to check for another user.',
     'time': 'Checks how long dolphinos has been in game',
-    'last': 'Checks when the last game played by Dolphinos was'
+    'last': 'Checks when the last game played by Dolphinos was',
+    'hours': 'Checks the amount of hours that Dolphinos has been in game over the specified timespan (given as argument)'
 }
+
 
 @bot.command(name='in', help=helper['in'])
 async def in_command(ctx):
     in_game = False
     for user in usernames:
-        if lol.check_if_ingame(user): 
+        if lol.check_if_ingame(user):
             in_game = True
     response = "@Dolphinos IS PLAYING LEAGUE OF LEGENDS" if in_game else "The neberizer is not playing league. @Dolphinos, time to come online!"
     await ctx.send(response)
+
 
 @bot.command(name='time', help=helper['time'])
 async def time_command(ctx):
@@ -34,9 +37,20 @@ async def time_command(ctx):
             return
     await ctx.send("The bbern is not in a game")
 
+
 @bot.command(name='last', help=helper['last'])
 async def last_command(ctx):
     response = "last game"
+    await ctx.send(response)
+
+
+@bot.command(name='hours', help=helper['hours'])
+async def hours_command(ctx, span: int):
+    hours = 0
+    for user in usernames:
+        hours += lol.get_timeplayed(user, span)
+    percent = (hours / span) * 100
+    response = "Over the last %d hours, Dolphinos has played league for %d hours. Thus, he has spend %d percent of his time playing league." % (span, hours, percent)
     await ctx.send(response)
 
 bot.run(TOKEN)

@@ -32,16 +32,13 @@ def check_if_ingame(summoner):
     return result
 
 # Gets the cumulative time played (in seconds) for matches that have
-# started within the past specified number of hours, up to 7 days
+# started within the past specified number of hours
 def get_timeplayed(summoner, hrs):
+
     # Surpress console output. This can be safely removed without
     # breaking functionality, but it made testing a lot easier.
     old_stdout = sys.stdout
     sys.stdout = None
-    # Tell user to piss off if they try to query for > 7 days
-    if (hrs > (7*24)):
-        print("Ya done fucked up, kid")
-        return -1
     # Get match history
     hist = summoner.match_history
     now = datetime.now()
