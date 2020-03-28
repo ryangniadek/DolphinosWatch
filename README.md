@@ -8,3 +8,14 @@ https://developer.riotgames.com/apis#summoner-v4/GET_getBySummonerName
 
 
 https://realpython.com/how-to-make-a-discord-bot-python/ 
+
+
+Commands
+
+DW!info - give information about the bot
+
+DW!in - check if dolphinos is in game
+
+DW!time - time played in the last 24 hours
+
+DW!last - the last game dolpinos has played

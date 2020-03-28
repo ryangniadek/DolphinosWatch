@@ -25,11 +25,20 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-    
-    help = "Dolphinos Watch is here to spy on the neberizer himself. REEEEEEEEEEEEEEEEEEEEEEE"
-
-    if message.content == '!DW':
-        response = help
+    elif 'DW!' not in message.content:
+        return  
+    elif 'info' in message.content:
+        response = "Named for our favorite League of Legends player, Dolphinos Watch alerts us all of Dolphinos' activity in game. Commands are:\n`DW!info - give information about the bot\nDW!in - check if dolphinos is in game\nDW!time - time played in the last 24 hours\nDW!last - the last game dolpinos has played`"
         await message.channel.send(response)
+    elif 'in' in message.content:
+        response = "in placeholder"
+        await message.channel.send(response)
+    elif 'time' in message.content:
+        response = "time in game"
+        await message.channel.send(response)
+    elif 'last' in message.content:
+        response = "last game"
+        await message.channel.send(response)
+
 
 client.run(TOKEN)
