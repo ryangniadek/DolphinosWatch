@@ -53,15 +53,17 @@ def get_timeplayed(summoner, hrs):
         # If match occurred within the specified time, add its duration
         # to the cumulative playtime for the past hrs.
         if (now-timedelta(hours=hrs)) <= date <= now:
-            t = str(match.duration)
-            h, m, s = t.split(':')
-            match_time_s = int(h) * 3600 + int(m) * 60 + int(s)
-            cumulative_time_s += match_time_s
+            cumulative_time_s += get_match_time(match)
     sys.stdout = old_stdout
     return cumulative_time_s
 
 # Returns the amount of time, in seconds, a summoner's game lasted
 # for a specified game object
+def get_match_time(match):
+    t = str(match.duration)
+    h, m, s = t.split(':')
+    return int(h) * 3600 + int(m) * 60 + int(s)
+
 
 # Returns the amount of time, in seconds, a summoner has been in their
 # current match, if they are in one.
