@@ -10,14 +10,22 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
 bot = commands.Bot(command_prefix='DW!')
-usernames = ['dolphinos', 'LHemisphere', 'neberizer']
+usernames = [lol.get_summoner('dolphinos'), lol.get_summoner('LHemisphere'), lol.get_summoner('neberizer')]
 helper = {
     'in': 'Checks if dolphinos is in a game on any of his accounts. Pass an optional paramter to check for another user.',
     'time': 'Checks how long dolphinos has been in game',
     'last': 'Checks when the last game played by Dolphinos was',
-    'hours': 'Checks the amount of hours that Dolphinos has been in game over the specified timespan (given as argument)'
+    'hours': 'Checks the amount of hours that Dolphinos has been in game over the specified timespan (given as argument in hours)'
 }
 
+@bot.event
+async def on_command_error(ctx, error):
+    response = 'Congrats, '
+    if isinstance(error, commands.CommandNotFound):
+        response = 'The command %s does not exist. Sorry not sorry.' % ctx
+    elif isinstance(error, commands.CommandError):
+        response = 'The command %s was not called correctly, check the help page' % ctx
+    await ctx.send(response)
 
 @bot.command(name='in', help=helper['in'])
 async def in_command(ctx):
@@ -46,9 +54,10 @@ async def last_command(ctx):
 
 @bot.command(name='hours', help=helper['hours'])
 async def hours_command(ctx, span: int):
-    hours = 0
+    seconds = 0
     for user in usernames:
-        hours += lol.get_timeplayed(user, span)
+        seconds += lol.get_timeplayed(user, span)
+    hours = seconds / 3600
     percent = (hours / span) * 100
     response = "Over the last %d hours, Dolphinos has played league for %d hours. Thus, he has spend %d percent of his time playing league." % (span, hours, percent)
     await ctx.send(response)
